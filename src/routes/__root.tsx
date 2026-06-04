@@ -81,11 +81,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Emptracker — Live group GPS tracking" },
       { name: "description", content: "Create groups, share live location with your team, and track everyone on one map." },
-      { property: "og:title", content: "Emptracker" },
-      { property: "og:description", content: "Live GPS tracking for teams and groups." },
+      { property: "og:title", content: "Emptracker — Live group GPS tracking" },
+      { property: "og:description", content: "Create groups, share live location with your team, and track everyone on one map." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Emptracker — Live group GPS tracking" },
+      { name: "twitter:description", content: "Create groups, share live location with your team, and track everyone on one map." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce5a201a-a447-4fa9-94fd-e49761d8934c/id-preview-0eb89007--91a4a6a6-09ca-42d7-b4a4-2b7aaa701d84.lovable.app-1780591709995.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ce5a201a-a447-4fa9-94fd-e49761d8934c/id-preview-0eb89007--91a4a6a6-09ca-42d7-b4a4-2b7aaa701d84.lovable.app-1780591709995.png" },
     ],
     links: [
       {
