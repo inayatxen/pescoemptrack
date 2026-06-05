@@ -19,7 +19,14 @@ import { type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSharing } from "@/contexts/SharingContext";
 
-const nav = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  badge?: boolean;
+};
+
+const nav: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/live-tracking", label: "Live Tracking", icon: Map },
   { to: "/members", label: "Members", icon: Users },
@@ -29,7 +36,7 @@ const nav = [
   { to: "/sos", label: "SOS Alert", icon: TriangleAlert, badge: true },
   { to: "/profile", label: "Profile", icon: User },
   { to: "/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 export default function AppShell({ userId, children }: { userId: string; children: ReactNode }) {
   const { location } = useRouterState();
@@ -105,7 +112,7 @@ export default function AppShell({ userId, children }: { userId: string; childre
             return (
               <Link
                 key={item.to}
-                to={item.to}
+                to={item.to as "/dashboard"}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
                   active
                     ? "bg-sidebar-accent font-semibold text-foreground"
