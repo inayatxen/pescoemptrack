@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedSosRouteImport } from './routes/_authenticated/sos'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedRouteHistoryRouteImport } from './routes/_authenticated/route-history'
 import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthenticatedSosRoute = AuthenticatedSosRouteImport.update({
   id: '/sos',
   path: '/sos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRouteHistoryRoute =
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/route-history': typeof AuthenticatedRouteHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/sos': typeof AuthenticatedSosRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/route-history': typeof AuthenticatedRouteHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/sos': typeof AuthenticatedSosRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/route-history': typeof AuthenticatedRouteHistoryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/sos': typeof AuthenticatedSosRoute
   '/_authenticated/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/_authenticated/groups/join': typeof AuthenticatedGroupsJoinRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reports'
     | '/route-history'
+    | '/settings'
     | '/sos'
     | '/groups/$groupId'
     | '/groups/join'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reports'
     | '/route-history'
+    | '/settings'
     | '/sos'
     | '/groups/$groupId'
     | '/groups/join'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/reports'
     | '/_authenticated/route-history'
+    | '/_authenticated/settings'
     | '/_authenticated/sos'
     | '/_authenticated/groups/$groupId'
     | '/_authenticated/groups/join'
@@ -228,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/sos'
       fullPath: '/sos'
       preLoaderRoute: typeof AuthenticatedSosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/route-history': {
@@ -311,6 +330,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedRouteHistoryRoute: typeof AuthenticatedRouteHistoryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSosRoute: typeof AuthenticatedSosRoute
   AuthenticatedGroupsGroupIdRoute: typeof AuthenticatedGroupsGroupIdRoute
   AuthenticatedGroupsJoinRoute: typeof AuthenticatedGroupsJoinRoute
@@ -325,6 +345,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedRouteHistoryRoute: AuthenticatedRouteHistoryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSosRoute: AuthenticatedSosRoute,
   AuthenticatedGroupsGroupIdRoute: AuthenticatedGroupsGroupIdRoute,
   AuthenticatedGroupsJoinRoute: AuthenticatedGroupsJoinRoute,
