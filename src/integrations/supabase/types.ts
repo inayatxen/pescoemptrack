@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      location_history: {
+        Row: {
+          id: string
+          user_id: string
+          latitude: number
+          longitude: number
+          speed: number | null
+          accuracy: number | null
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          latitude: number
+          longitude: number
+          speed?: number | null
+          accuracy?: number | null
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          latitude?: number
+          longitude?: number
+          speed?: number | null
+          accuracy?: number | null
+          recorded_at?: string
+        }
+        Relationships: []
+      }
       group_members: {
         Row: {
           group_id: string
