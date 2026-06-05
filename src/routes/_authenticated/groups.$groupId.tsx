@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import LiveMap, { type MapMarker } from "@/components/LiveMap";
-import { useShareLocation } from "@/hooks/useShareLocation";
+import { useSharing } from "@/contexts/SharingContext";
 import { ArrowLeft, Radio, Copy, Users, LogOut, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,7 +19,7 @@ function GroupPage() {
   const { user } = Route.useRouteContext();
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const [sharing, setSharing] = useState(true);
+  const { sharing, toggle, error: locError, lastUpdate } = useSharing();
   const [showMembers, setShowMembers] = useState(false);
 
   const { data: group, isLoading: groupLoading } = useQuery({
@@ -77,8 +77,6 @@ function GroupPage() {
       supabase.removeChannel(channel);
     };
   }, [groupId, memberIds, qc]);
-
-  const { error: locError, lastUpdate } = useShareLocation(sharing, user.id);
 
   const markers: MapMarker[] = useMemo(() => {
     return (locations ?? []).map((loc, idx) => {
@@ -170,7 +168,7 @@ function GroupPage() {
               </div>
             </div>
             <button
-              onClick={() => setSharing((s) => !s)}
+              onClick={toggle}
               className={`relative h-7 w-12 rounded-full transition ${sharing ? "bg-primary" : "bg-muted"}`}
             >
               <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white transition ${sharing ? "left-[22px]" : "left-0.5"}`} />
