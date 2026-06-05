@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedSosRouteImport } from './routes/_authenticated/sos'
 import { Route as AuthenticatedRouteHistoryRouteImport } from './routes/_authenticated/route-history'
 import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
 import { Route as AuthenticatedLiveTrackingRouteImport } from './routes/_authenticated/live-tracking'
@@ -51,6 +52,11 @@ const AuthenticatedRouteHistoryRoute =
 const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedNotificationsRoute =
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/members': typeof AuthenticatedMembersRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/route-history': typeof AuthenticatedRouteHistoryRoute
   '/sos': typeof AuthenticatedSosRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/members': typeof AuthenticatedMembersRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/route-history': typeof AuthenticatedRouteHistoryRoute
   '/sos': typeof AuthenticatedSosRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/_authenticated/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/_authenticated/members': typeof AuthenticatedMembersRoute
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/route-history': typeof AuthenticatedRouteHistoryRoute
   '/_authenticated/sos': typeof AuthenticatedSosRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/live-tracking'
     | '/members'
     | '/notifications'
+    | '/profile'
     | '/reports'
     | '/route-history'
     | '/sos'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/live-tracking'
     | '/members'
     | '/notifications'
+    | '/profile'
     | '/reports'
     | '/route-history'
     | '/sos'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/_authenticated/live-tracking'
     | '/_authenticated/members'
     | '/_authenticated/notifications'
+    | '/_authenticated/profile'
     | '/_authenticated/reports'
     | '/_authenticated/route-history'
     | '/_authenticated/sos'
@@ -230,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/notifications': {
@@ -289,6 +308,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLiveTrackingRoute: typeof AuthenticatedLiveTrackingRoute
   AuthenticatedMembersRoute: typeof AuthenticatedMembersRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedRouteHistoryRoute: typeof AuthenticatedRouteHistoryRoute
   AuthenticatedSosRoute: typeof AuthenticatedSosRoute
@@ -302,6 +322,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLiveTrackingRoute: AuthenticatedLiveTrackingRoute,
   AuthenticatedMembersRoute: AuthenticatedMembersRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedRouteHistoryRoute: AuthenticatedRouteHistoryRoute,
   AuthenticatedSosRoute: AuthenticatedSosRoute,
