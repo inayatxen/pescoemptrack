@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteHistoryRouteImport } from './routes/_authenticated/route-history'
 import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
 import { Route as AuthenticatedLiveTrackingRouteImport } from './routes/_authenticated/live-tracking'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -33,6 +34,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteHistoryRoute =
+  AuthenticatedRouteHistoryRouteImport.update({
+    id: '/route-history',
+    path: '/route-history',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedMembersRoute = AuthenticatedMembersRouteImport.update({
   id: '/members',
   path: '/members',
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/members': typeof AuthenticatedMembersRoute
+  '/route-history': typeof AuthenticatedRouteHistoryRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/members': typeof AuthenticatedMembersRoute
+  '/route-history': typeof AuthenticatedRouteHistoryRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -94,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/live-tracking': typeof AuthenticatedLiveTrackingRoute
   '/_authenticated/members': typeof AuthenticatedMembersRoute
+  '/_authenticated/route-history': typeof AuthenticatedRouteHistoryRoute
   '/_authenticated/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/_authenticated/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/_authenticated/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/live-tracking'
     | '/members'
+    | '/route-history'
     | '/groups/$groupId'
     | '/groups/join'
     | '/groups/new'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/live-tracking'
     | '/members'
+    | '/route-history'
     | '/groups/$groupId'
     | '/groups/join'
     | '/groups/new'
@@ -127,6 +139,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/live-tracking'
     | '/_authenticated/members'
+    | '/_authenticated/route-history'
     | '/_authenticated/groups/$groupId'
     | '/_authenticated/groups/join'
     | '/_authenticated/groups/new'
@@ -160,6 +173,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/route-history': {
+      id: '/_authenticated/route-history'
+      path: '/route-history'
+      fullPath: '/route-history'
+      preLoaderRoute: typeof AuthenticatedRouteHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/members': {
       id: '/_authenticated/members'
@@ -210,6 +230,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLiveTrackingRoute: typeof AuthenticatedLiveTrackingRoute
   AuthenticatedMembersRoute: typeof AuthenticatedMembersRoute
+  AuthenticatedRouteHistoryRoute: typeof AuthenticatedRouteHistoryRoute
   AuthenticatedGroupsGroupIdRoute: typeof AuthenticatedGroupsGroupIdRoute
   AuthenticatedGroupsJoinRoute: typeof AuthenticatedGroupsJoinRoute
   AuthenticatedGroupsNewRoute: typeof AuthenticatedGroupsNewRoute
@@ -219,6 +240,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLiveTrackingRoute: AuthenticatedLiveTrackingRoute,
   AuthenticatedMembersRoute: AuthenticatedMembersRoute,
+  AuthenticatedRouteHistoryRoute: AuthenticatedRouteHistoryRoute,
   AuthenticatedGroupsGroupIdRoute: AuthenticatedGroupsGroupIdRoute,
   AuthenticatedGroupsJoinRoute: AuthenticatedGroupsJoinRoute,
   AuthenticatedGroupsNewRoute: AuthenticatedGroupsNewRoute,
