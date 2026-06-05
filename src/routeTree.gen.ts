@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
 import { Route as AuthenticatedLiveTrackingRouteImport } from './routes/_authenticated/live-tracking'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedGroupsNewRouteImport } from './routes/_authenticated/groups.new'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedMembersRoute = AuthenticatedMembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedLiveTrackingRoute =
   AuthenticatedLiveTrackingRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
+  '/members': typeof AuthenticatedMembersRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/live-tracking': typeof AuthenticatedLiveTrackingRoute
+  '/members': typeof AuthenticatedMembersRoute
   '/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/live-tracking': typeof AuthenticatedLiveTrackingRoute
+  '/_authenticated/members': typeof AuthenticatedMembersRoute
   '/_authenticated/groups/$groupId': typeof AuthenticatedGroupsGroupIdRoute
   '/_authenticated/groups/join': typeof AuthenticatedGroupsJoinRoute
   '/_authenticated/groups/new': typeof AuthenticatedGroupsNewRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/live-tracking'
+    | '/members'
     | '/groups/$groupId'
     | '/groups/join'
     | '/groups/new'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/live-tracking'
+    | '/members'
     | '/groups/$groupId'
     | '/groups/join'
     | '/groups/new'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/dashboard'
     | '/_authenticated/live-tracking'
+    | '/_authenticated/members'
     | '/_authenticated/groups/$groupId'
     | '/_authenticated/groups/join'
     | '/_authenticated/groups/new'
@@ -148,6 +160,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/members': {
+      id: '/_authenticated/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof AuthenticatedMembersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/live-tracking': {
       id: '/_authenticated/live-tracking'
@@ -190,6 +209,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLiveTrackingRoute: typeof AuthenticatedLiveTrackingRoute
+  AuthenticatedMembersRoute: typeof AuthenticatedMembersRoute
   AuthenticatedGroupsGroupIdRoute: typeof AuthenticatedGroupsGroupIdRoute
   AuthenticatedGroupsJoinRoute: typeof AuthenticatedGroupsJoinRoute
   AuthenticatedGroupsNewRoute: typeof AuthenticatedGroupsNewRoute
@@ -198,6 +218,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLiveTrackingRoute: AuthenticatedLiveTrackingRoute,
+  AuthenticatedMembersRoute: AuthenticatedMembersRoute,
   AuthenticatedGroupsGroupIdRoute: AuthenticatedGroupsGroupIdRoute,
   AuthenticatedGroupsJoinRoute: AuthenticatedGroupsJoinRoute,
   AuthenticatedGroupsNewRoute: AuthenticatedGroupsNewRoute,
