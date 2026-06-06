@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { MapPin, Loader2 } from "lucide-react";
+import { MapPin, Loader as Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -78,7 +78,7 @@ function AuthPage() {
               <Input value={displayName} onChange={setDisplayName} type="text" placeholder="Your name" />
             )}
             <Input value={email} onChange={setEmail} type="email" placeholder="Email" required />
-            <Input value={password} onChange={setPassword} type="password" placeholder="Password" required minLength={6} />
+            <Input value={password} onChange={setPassword} type="password" placeholder="Password" required />
 
             <button
               type="submit"
